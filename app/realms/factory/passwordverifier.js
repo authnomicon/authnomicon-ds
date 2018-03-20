@@ -37,7 +37,7 @@ exports = module.exports = function(IoC, ldap, file, logger) {
 
 exports['@require'] = [
   '!container',
-  '../../plugins/ldap/password',
-  '../../plugins/file/password',
+  '../../ldap/password',
+  '../../file/password',
   'http://i.bixbyjs.org/Logger'
 ];

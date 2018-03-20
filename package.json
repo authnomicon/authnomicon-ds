@@ -35,7 +35,8 @@
   "dependencies": {
     "clone": "^2.1.1",
     "decisions": "^0.2.0",
-    "fluidfactory": "^0.1.0"
+    "fluidfactory": "^0.1.0",
+    "ldapjs": "^1.0.2"
   },
   "devDependencies": {
     "make-node": "^0.3.0",
