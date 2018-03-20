@@ -18,7 +18,7 @@ exports = module.exports = function(resolver, passwordVerifierFactory, directory
   return api;
 };
 
-exports['@implements'] = 'http://schemas.modulate.io/js/aaa/realms';
+exports['@implements'] = 'http://schemas.authnomicon.org/js/ds/realms';
 exports['@singleton'] = true;
 exports['@require'] = [
   './resolver',
