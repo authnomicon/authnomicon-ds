@@ -1,0 +1,43 @@
+{
+  "name": "authnomicon-ds",
+  "version": "0.0.0",
+  "description": "Directory service components for the Authnomicon project.",
+  "keywords": [
+    "directory",
+    "ldap",
+    "ad"
+  ],
+  "author": {
+    "name": "Jared Hanson",
+    "email": "jaredhanson@gmail.com",
+    "url": "http://jaredhanson.net/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/authnomicon/ds.git"
+  },
+  "bugs": {
+    "url": "http://github.com/authnomicon/ds/issues"
+  },
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "main": "./app",
+  "assembly": {
+    "namespace": "org.authnomicon/ds",
+    "components": [
+    ]
+  },
+  "devDependencies": {
+    "make-node": "^0.3.0",
+    "mocha": "^2.0.0",
+    "chai": "^3.0.0"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha test/*.test.js"
+  }
+}
