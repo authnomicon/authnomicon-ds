@@ -4,10 +4,10 @@ exports = module.exports = function(IoC, file, logger) {
   
   var factory = new Factory();
   
-  function create(plugin) {
+  function create(provider) {
     return function(options) {
-      if (plugin.canCreate(options)) {
-        return plugin.create(options);
+      if (provider.canCreate(options)) {
+        return provider.create(options);
       }
     };
   }
@@ -17,10 +17,10 @@ exports = module.exports = function(IoC, file, logger) {
       var components = IoC.components('http://schemas.authnomicon.org/js/ds/realms/ResolverProvider');
   
       return Promise.all(components.map(function(comp) { return comp.create(); } ))
-        .then(function(plugins) {
-          plugins.forEach(function(plugin, i) {
+        .then(function(providers) {
+          providers.forEach(function(provider, i) {
             logger.info('Loaded realm resolver provider: ' + components[i].a['@name']);
-            factory.use(create(plugin));
+            factory.use(create(provider));
           });
           
           factory.use(create(file));
