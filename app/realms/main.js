@@ -1,4 +1,4 @@
-exports = module.exports = function(resolver, passwordVerifierFactory, directoryFactory) {
+exports = module.exports = function(passwordVerifierFactory, directoryFactory, resolver) {
   var Realm = require('../../lib/realms/realm');
   
   
@@ -18,10 +18,13 @@ exports = module.exports = function(resolver, passwordVerifierFactory, directory
   return api;
 };
 
-exports['@implements'] = 'http://schemas.authnomicon.org/js/ds/realms';
+exports['@implements'] = [
+  'http://schemas.authnomicon.org/js/ds/realms',
+  'http://schemas.modulate.io/js/aaa/realms' // TODO: remove this
+];
 exports['@singleton'] = true;
 exports['@require'] = [
-  './resolver',
-  '../ds/authentication/password/verifierfactory',
-  '../ds/directory/factory'
+  './factory/passwordverifier',
+  './factory/directory',
+  './resolver'
 ];

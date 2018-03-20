@@ -1,7 +1,7 @@
 exports = module.exports = function() {
   var uri = require('url')
-    , FileDirectory = require('../../../../lib/ds/file/directory')
-    , FilePasswordVerifier = require('../../../../lib/ds/file/pwver')
+    , FileDirectory = require('../../lib/file/directory')
+    , FilePasswordVerifier = require('../../lib/file/pwver')
   
   
   return {

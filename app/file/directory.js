@@ -1,6 +1,6 @@
 exports = module.exports = function() {
   var uri = require('url')
-    , FileDirectory = require('../../../../lib/ds/file/directory');
+    , FileDirectory = require('../../lib/file/directory');
   
   
   return {

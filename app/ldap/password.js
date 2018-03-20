@@ -1,7 +1,7 @@
 exports = module.exports = function(ldap) {
   var uri = require('url')
     , ldap = require('ldapjs')
-    , LDAPPasswordVerifier = require('../../../../lib/ds/ldap/pwver/bind');
+    , LDAPPasswordVerifier = require('../../lib/ldap/pwver/bind');
   
   
   return {

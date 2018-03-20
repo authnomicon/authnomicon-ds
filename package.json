@@ -1,5 +1,5 @@
 {
-  "name": "authnomicon-ds",
+  "name": "@authnomicon/ds",
   "version": "0.0.0",
   "description": "Directory service components for the Authnomicon project.",
   "keywords": [

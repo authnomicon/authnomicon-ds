@@ -1,7 +1,7 @@
 exports = module.exports = function(ldap) {
   var uri = require('url')
     , ldap = require('ldapjs')
-    , LDAPDirectory = require('../../../../lib/ds/ldap/directory');
+    , LDAPDirectory = require('../../lib/ldap/directory');
   
   
   return {
