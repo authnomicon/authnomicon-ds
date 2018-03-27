@@ -1,4 +1,4 @@
-exports = module.exports = function(ldap) {
+exports = module.exports = function(ldap, x500) {
   var uri = require('url')
     , ldap = require('ldapjs')
     , LDAPPasswordVerifier = require('../../lib/ldap/pwver/bind');
@@ -34,7 +34,7 @@ exports = module.exports = function(ldap) {
       
       var client = ldap.createClient(opts);
       var adminClient = ldap.createClient(adminOpts);
-      var verifier = new LDAPPasswordVerifier(client, adminClient, url.DN);
+      var verifier = new LDAPPasswordVerifier(client, adminClient, url.DN, x500);
       return verifier;
     }
   };
@@ -42,5 +42,6 @@ exports = module.exports = function(ldap) {
 
 exports['@name'] = 'ldap';
 exports['@require'] = [
-  'http://i.bixbyjs.org/ldap'
+  'http://i.bixbyjs.org/ldap',
+  'http://i.bixbyjs.org/x500'
 ];

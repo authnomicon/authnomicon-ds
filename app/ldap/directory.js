@@ -1,4 +1,4 @@
-exports = module.exports = function(ldap) {
+exports = module.exports = function(ldap, x500) {
   var uri = require('url')
     , ldap = require('ldapjs')
     , LDAPDirectory = require('../../lib/ldap/directory');
@@ -39,5 +39,6 @@ exports = module.exports = function(ldap) {
 
 exports['@name'] = 'ldap';
 exports['@require'] = [
-  'http://i.bixbyjs.org/ldap'
+  'http://i.bixbyjs.org/ldap',
+  'http://i.bixbyjs.org/x500'
 ];
