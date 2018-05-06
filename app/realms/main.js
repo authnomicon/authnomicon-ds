@@ -15,6 +15,24 @@ exports = module.exports = function(passwordVerifierFactory, directoryFactory, r
     });
   };
   
+  
+  api.get = function(id, realm, cb) {
+    console.log('GET ENTITY!');
+    console.log(id);
+    console.log(realm);
+    
+    api.resolve(realm, function(err, realm) {
+      if (err) { return cb(err); }
+      
+      var dir = realm.createDirectory(function() {
+        dir.get(id, function(err, entity) {
+          if (err) { return cb(err); }
+          return cb(null, entity);
+        });
+      });
+    });
+  };
+  
   return api;
 };
 
