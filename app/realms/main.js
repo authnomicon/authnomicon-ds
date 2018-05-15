@@ -33,6 +33,22 @@ exports = module.exports = function(passwordVerifierFactory, directoryFactory, r
     });
   };
   
+  // TODO: add, modify, delete
+  
+  api.authenticate = function(username, password, realm, cb) {
+    api.resolve(realm, function(err, realm) {
+      if (err) { return cb(err); }
+      
+      var pwver = realm.createPasswordVerifier(function() {
+        pwver.verify(username, password, function(err, entity) {
+          if (err) { return cb(err); }
+          if (!entity) { return cb(null, false); }
+          return cb(null, entity);
+        });
+      });
+    });
+  }
+  
   return api;
 };
 
