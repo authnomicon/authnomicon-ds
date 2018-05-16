@@ -53,7 +53,8 @@ exports = module.exports = function(passwordVerifierFactory, directoryFactory, r
 };
 
 exports['@implements'] = [
-  'http://schemas.authnomicon.org/js/ds/realms',
+  'http://schemas.authnomicon.org/js/ds',
+  'http://schemas.authnomicon.org/js/ds/realms', // TODO: remove this
   'http://schemas.modulate.io/js/aaa/realms' // TODO: remove this
 ];
 exports['@singleton'] = true;
