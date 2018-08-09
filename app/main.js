@@ -1,6 +1,4 @@
-exports = module.exports = function(agent) {
-  
-  
+exports = module.exports = function(agent, utils) {
   var api = {};
   
   api.get = function(url, id, options, cb) {
@@ -11,27 +9,18 @@ exports = module.exports = function(agent) {
     options = options || {};
     options.url = url;
     
-    var name = agent.getName(options);
+    function onready() {
+      conn.get(id, function(err, entity) {
+        if (err) { return cb(err); }
+        return cb(null, entity);
+      });
+    }
     
-    var conn = agent._connections[name];
-    if (conn) {
-      
+    var conn = utils.getConnection(agent, options);
+    if (typeof conn.once == 'function') {
+      conn.once('ready', onready);
     } else {
-      conn = agent.createConnection(options);
-      agent.addConnection(conn);
-      
-      function onready() {
-        conn.get(id, function(err, entity) {
-          if (err) { return cb(err); }
-          return cb(null, entity);
-        });
-      }
-      
-      if (typeof conn.once == 'function') {
-        conn.once('ready', onready);
-      } else {
-        process.nextTick(onready);
-      }
+      process.nextTick(onready);
     }
   }
   
@@ -43,28 +32,19 @@ exports = module.exports = function(agent) {
     options = options || {};
     options.url = url;
     
-    var name = agent.getName(options);
+    function onready() {
+      conn.authenticate(username, password, function(err, entity) {
+        if (err) { return cb(err); }
+        if (!entity) { return cb(null, false); }
+        return cb(null, entity);
+      });
+    }
     
-    var conn = agent._connections[name];
-    if (conn) {
-      
+    var conn = utils.getConnection(agent, options);
+    if (typeof conn.once == 'function') {
+      conn.once('ready', onready);
     } else {
-      conn = agent.createConnection(options);
-      agent.addConnection(conn);
-      
-      function onready() {
-        conn.authenticate(username, password, function(err, entity) {
-          if (err) { return cb(err); }
-          if (!entity) { return cb(null, false); }
-          return cb(null, entity);
-        });
-      }
-      
-      if (typeof conn.once == 'function') {
-        conn.once('ready', onready);
-      } else {
-        process.nextTick(onready);
-      }
+      process.nextTick(onready);
     }
   }
   
@@ -74,5 +54,6 @@ exports = module.exports = function(agent) {
 exports['@implements'] = 'http://schemas.authnomicon.org/js/ds';
 exports['@singleton'] = true;
 exports['@require'] = [
-  './agent'
+  './agent',
+  './utils'
 ];
