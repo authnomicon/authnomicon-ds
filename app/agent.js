@@ -1,4 +1,4 @@
-exports = module.exports = function(IoC, logger) {
+exports = module.exports = function(IoC, ldap, logger) {
   var Agent = require('../lib/agent');
   
   
@@ -14,6 +14,8 @@ exports = module.exports = function(IoC, logger) {
             logger.info('Loaded directory access protocol: ' + components[i].a['@protocol']);
             agent.use(plugin);
           });
+          
+          agent.use(ldap)
         })
         .then(function() {
           return agent;
@@ -27,5 +29,6 @@ exports = module.exports = function(IoC, logger) {
 exports['@singleton'] = true;
 exports['@require'] = [
   '!container',
+  './ldap/protocol',
   'http://i.bixbyjs.org/Logger'
 ];

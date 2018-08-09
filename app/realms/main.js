@@ -52,34 +52,7 @@ exports = module.exports = function(passwordVerifierFactory, directoryFactory, r
   api.authenticate = function(username, password, realm, cb) {
     api.resolve(realm, 'PW', function(err, realm) {
       if (err) { return cb(err); }
-      
-      console.log('RESOLVED PW!');
-      console.log(realm);
-      
-      ds.authenticate(realm._config.url, username, password, function(err, entity) {
-        console.log('AUTHENTICATED!');
-        console.log(err);
-        console.log(entity);
-      })
-      
-      
-      /*
-      var conn = api.createConnection(realm._config, function() {
-        console.log('READY!');
-      });
-      */
-      
-      return;
-      
-      
-      var pwver = realm.createPasswordVerifier(function() {
-        pwver.verify(username, password, function(err, entity) {
-          if (err) { return cb(err); }
-          if (!entity) { return cb(null, false); }
-          return cb(null, entity);
-        });
-      });
-      
+      ds.authenticate(realm._config.url, username, password, cb);
     });
   }
   
