@@ -1,10 +1,10 @@
 /* global describe, it, expect */
 
 var expect = require('chai').expect;
-var factory = require('../../app/realms/main');
+var factory = require('../app/main');
 
 
-describe('realms/main', function() {
+describe('main', function() {
   
   it('should export factory function', function() {
     expect(factory).to.be.a('function');

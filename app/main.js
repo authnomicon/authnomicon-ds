@@ -1,5 +1,5 @@
 exports = module.exports = function(passwordVerifierFactory, directoryFactory, resolver) {
-  var Realm = require('../../lib/realms/realm');
+  var Realm = require('../lib/realms/realm');
   
   
   var api = {};
@@ -59,7 +59,7 @@ exports['@implements'] = [
 ];
 exports['@singleton'] = true;
 exports['@require'] = [
-  './factory/passwordverifier',
-  './factory/directory',
-  './resolver'
+  './realms/factory/passwordverifier',
+  './realms/factory/directory',
+  './realms/resolver'
 ];
