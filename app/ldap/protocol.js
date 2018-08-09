@@ -42,7 +42,6 @@ exports = module.exports = function(LDAP, X500) {
   };
 };
 
-exports['@name'] = 'ldap';
 exports['@require'] = [
   'http://i.bixbyjs.org/ldap',
   'http://i.bixbyjs.org/x500'

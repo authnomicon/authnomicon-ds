@@ -20,13 +20,19 @@ exports = module.exports = function(agent) {
       conn = agent.createConnection(options);
       agent.addConnection(conn);
       
-      conn.once('ready', function() {
+      function onready() {
         conn.authenticate(username, password, function(err, entity) {
           if (err) { return cb(err); }
           if (!entity) { return cb(null, false); }
           return cb(null, entity);
         });
-      });
+      }
+      
+      if (typeof conn.once == 'function') {
+        conn.once('ready', onready);
+      } else {
+        process.nextTick(onready);
+      }
     }
   }
   
