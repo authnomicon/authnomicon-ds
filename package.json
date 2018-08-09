@@ -30,6 +30,7 @@
   "assembly": {
     "namespace": "org.authnomicon/ds",
     "components": [
+      "main",
       "realms/main"
     ]
   },

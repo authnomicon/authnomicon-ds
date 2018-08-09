@@ -1,4 +1,4 @@
-exports = module.exports = function(passwordVerifierFactory, directoryFactory, resolver) {
+exports = module.exports = function(passwordVerifierFactory, directoryFactory, resolver, ds) {
   var Realm = require('../../lib/realms/realm');
   
   
@@ -56,11 +56,20 @@ exports = module.exports = function(passwordVerifierFactory, directoryFactory, r
       console.log('RESOLVED PW!');
       console.log(realm);
       
+      ds.authenticate(realm._config.url, username, password, function(err, entity) {
+        console.log('AUTHENTICATED!');
+        console.log(err);
+        console.log(entity);
+      })
+      
+      
       /*
       var conn = api.createConnection(realm._config, function() {
         console.log('READY!');
       });
       */
+      
+      return;
       
       
       var pwver = realm.createPasswordVerifier(function() {
@@ -83,10 +92,11 @@ exports = module.exports = function(passwordVerifierFactory, directoryFactory, r
   return api;
 };
 
-exports['@implements'] = 'http://schemas.authnomicon.org/js/ds';
+exports['@implements'] = 'http://schemas.authnomicon.org/js/ds/realms';
 exports['@singleton'] = true;
 exports['@require'] = [
   './factory/passwordverifier',
   './factory/directory',
-  './resolver'
+  './resolver',
+  'http://schemas.authnomicon.org/js/ds'
 ];
