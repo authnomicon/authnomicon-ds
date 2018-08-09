@@ -3,6 +3,38 @@ exports = module.exports = function(agent) {
   
   var api = {};
   
+  api.get = function(url, id, options, cb) {
+    if (typeof options == 'function') {
+      cb = options;
+      options = undefined;
+    }
+    options = options || {};
+    options.url = url;
+    
+    var name = agent.getName(options);
+    
+    var conn = agent._connections[name];
+    if (conn) {
+      
+    } else {
+      conn = agent.createConnection(options);
+      agent.addConnection(conn);
+      
+      function onready() {
+        conn.get(id, function(err, entity) {
+          if (err) { return cb(err); }
+          return cb(null, entity);
+        });
+      }
+      
+      if (typeof conn.once == 'function') {
+        conn.once('ready', onready);
+      } else {
+        process.nextTick(onready);
+      }
+    }
+  }
+  
   api.authenticate = function(url, username, password, options, cb) {
     if (typeof options == 'function') {
       cb = options;

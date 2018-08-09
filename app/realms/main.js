@@ -37,13 +37,16 @@ exports = module.exports = function(passwordVerifierFactory, directoryFactory, r
     
     api.resolve(realm, 'D', function(err, realm) {
       if (err) { return cb(err); }
+      ds.get(realm._config.url, id, cb);
       
+      /*
       var dir = realm.createDirectory(function() {
         dir.get(id, function(err, entity) {
           if (err) { return cb(err); }
           return cb(null, entity);
         });
       });
+      */
     });
   };
   
