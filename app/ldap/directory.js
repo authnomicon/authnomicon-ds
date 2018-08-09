@@ -1,4 +1,4 @@
-exports = module.exports = function(ldap, x500) {
+exports = module.exports = function(LDAP, x500) {
   var uri = require('url')
     , ldap = require('ldapjs')
     , LDAPDirectory = require('../../lib/ldap/directory');
@@ -30,7 +30,7 @@ exports = module.exports = function(ldap, x500) {
         opts.bindCredentials = process.env['LDAP_ADMIN_PASSWORD'];
       }
       
-      var client = ldap.createClient(opts);
+      var client = LDAP.createClient(opts);
       var directory = new LDAPDirectory(client, url.DN);
       return directory;
     }
