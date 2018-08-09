@@ -12,7 +12,7 @@ describe('@authnomicon/ds', function() {
       expect(json.assembly.namespace).to.equal('org.authnomicon/ds');
       
       expect(json.assembly.components).to.have.length(1);
-      expect(json.assembly.components).to.include('main');
+      expect(json.assembly.components).to.include('realms/main');
     });
   });
   

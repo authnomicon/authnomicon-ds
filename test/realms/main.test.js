@@ -1,7 +1,7 @@
 /* global describe, it, expect */
 
 var expect = require('chai').expect;
-var factory = require('../app/main');
+var factory = require('../../app/realms/main');
 
 
 describe('main', function() {
