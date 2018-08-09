@@ -3,6 +3,9 @@ exports = module.exports = function(LDAP, X500) {
     , ldap = require('ldapjs')
     , LDAPPasswordVerifier = require('../../lib/ldap/pwver/bind');
   
+  // TODO: Implement a local directory
+  // dscl /Local/Default -authonly username password
+  
   
   return {
     createConnection: function(options) {
