@@ -16,10 +16,11 @@ exports = module.exports = function(resolver, ds) {
   
   
   api.add = function(entity, realm, cb) {
-    console.log('ADD ENTITY');
-    console.log(entity)
-    console.log(realm);
-  }
+    api.resolve(realm, 'D', function(err, config) {
+      if (err) { return cb(err); }
+      ds.add(config.url, entity, cb);
+    });
+  };
   
   api.get = function(id, realm, cb) {
     api.resolve(realm, 'D', function(err, config) {
@@ -35,7 +36,7 @@ exports = module.exports = function(resolver, ds) {
       if (err) { return cb(err); }
       ds.authenticate(config.url, username, password, cb);
     });
-  }
+  };
   
   return api;
 };
