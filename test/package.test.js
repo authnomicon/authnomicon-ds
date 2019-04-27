@@ -11,9 +11,8 @@ describe('@authnomicon/ds', function() {
     it('should have assembly metadata', function() {
       expect(json.assembly.namespace).to.equal('org.authnomicon/ds');
       
-      expect(json.assembly.components).to.have.length(2);
+      expect(json.assembly.components).to.have.length(1);
       expect(json.assembly.components).to.include('main');
-      expect(json.assembly.components).to.include('realms/main');
     });
   });
   
