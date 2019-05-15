@@ -3,6 +3,7 @@ exports = module.exports = function(IoC, ldap, file, logger) {
   
   
   var agent = new Agent();
+  return agent;
   
   return Promise.resolve(agent)
     .then(function(agent) {
@@ -30,7 +31,7 @@ exports = module.exports = function(IoC, ldap, file, logger) {
 exports['@singleton'] = true;
 exports['@require'] = [
   '!container',
-  './ldap/protocol',
-  './file/protocol',
+  //'./ldap/protocol',
+  //'./file/protocol',
   'http://i.bixbyjs.org/Logger'
 ];

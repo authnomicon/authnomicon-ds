@@ -1,4 +1,4 @@
-exports = module.exports = function(agent, utils) {
+exports = module.exports = function(agent, utils, services) {
   var api = {};
   
   api.add = function(url, entity, options, cb) {
@@ -25,6 +25,22 @@ exports = module.exports = function(agent, utils) {
   };
   
   api.get = function(url, id, options, cb) {
+    if (typeof options == 'function') {
+      cb = options;
+      options = undefined;
+    }
+    options = options || {};
+    
+    var type = options.type;
+    services.createConnection(type, { url: url }, function() {
+      this.get(id, function(err, user) {
+        if (err) { return cb(err); }
+        return cb(null, user);
+      });
+    });
+    
+    return;
+    
     if (typeof options == 'function') {
       cb = options;
       options = undefined;
@@ -78,5 +94,6 @@ exports['@implements'] = 'http://schemas.authnomicon.org/js/ds';
 exports['@singleton'] = true;
 exports['@require'] = [
   './agent',
-  './utils'
+  './utils',
+  'http://i.bixbyjs.org/services'
 ];
