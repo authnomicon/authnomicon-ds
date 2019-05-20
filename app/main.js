@@ -1,4 +1,4 @@
-exports = module.exports = function(IoC, agent, utils, connect, services) {
+exports = module.exports = function(IoC, agent, utils, connect) {
   
   var modules = IoC.components('http://i.authnomicon.org/js/ds/IDirectoryService')
     , services = modules.map(function(m) { return m.a['@name']; });
@@ -74,6 +74,5 @@ exports['@require'] = [
   '!container',
   './agent',
   './utils',
-  'http://i.bixbyjs.org/ns/connect',
-  'http://i.bixbyjs.org/services'
+  'http://i.bixbyjs.org/ns/connect'
 ];
