@@ -33,6 +33,7 @@ exports = module.exports = function(IoC, agent, utils, connect, services) {
   api.get = function(id, cb) {
     connect(services, function(err, conn) {
       if (err) { return cb(err); }
+      
       conn.get(id, function(err, user) {
         if (err) { return cb(err); }
         return cb(null, user);
