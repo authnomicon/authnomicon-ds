@@ -1,4 +1,9 @@
-exports = module.exports = function(agent, utils, services) {
+exports = module.exports = function(IoC, agent, utils, connect, services) {
+  
+  var modules = IoC.components('http://i.authnomicon.org/js/ds/IDirectoryService')
+    , services = modules.map(function(m) { return m.a['@name']; });
+  
+  
   var api = {};
   
   api.add = function(url, entity, options, cb) {
@@ -24,43 +29,15 @@ exports = module.exports = function(agent, utils, services) {
     }
   };
   
-  api.get = function(url, id, options, cb) {
-    if (typeof options == 'function') {
-      cb = options;
-      options = undefined;
-    }
-    options = options || {};
-    
-    var type = options.type;
-    services.createConnection(type, { url: url }, function() {
-      this.get(id, function(err, user) {
+  // TODO: if realm is an argument, resolve it to a specific service, and proceed with that.
+  api.get = function(id, cb) {
+    connect(services, function(err, conn) {
+      if (err) { return cb(err); }
+      conn.get(id, function(err, user) {
         if (err) { return cb(err); }
         return cb(null, user);
       });
     });
-    
-    return;
-    
-    if (typeof options == 'function') {
-      cb = options;
-      options = undefined;
-    }
-    options = options || {};
-    options.url = url;
-    
-    function onready() {
-      conn.get(id, function(err, entity) {
-        if (err) { return cb(err); }
-        return cb(null, entity);
-      });
-    }
-    
-    var conn = utils.getConnection(agent, options);
-    if (typeof conn.once == 'function') {
-      conn.once('ready', onready);
-    } else {
-      process.nextTick(onready);
-    }
   };
   
   api.authenticate = function(url, username, password, options, cb) {
@@ -93,7 +70,9 @@ exports = module.exports = function(agent, utils, services) {
 exports['@implements'] = 'http://schemas.authnomicon.org/js/ds';
 exports['@singleton'] = true;
 exports['@require'] = [
+  '!container',
   './agent',
   './utils',
+  'http://i.bixbyjs.org/ns/connect',
   'http://i.bixbyjs.org/services'
 ];
